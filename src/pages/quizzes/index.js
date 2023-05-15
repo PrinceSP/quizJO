@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
   option:{
     width:"100%",
     height:60,
+    // flex:1,
+    flexShrink: 1,
     borderRadius:20,
     borderWidth:4,
     borderColor:"#2b4967",
@@ -29,7 +31,6 @@ const styles = StyleSheet.create({
 
 const Quizzes = ({navigation}) => {
   const [questionNumber,setQuestionNumber] = useState(1)
-  console.log(questionNumber);
   return (
     <View style={styles.container}>
      <StatusBar
@@ -48,9 +49,9 @@ const Quizzes = ({navigation}) => {
            </TouchableOpacity>
          ))}
          <View style={{width:"100%",marginTop:30,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-           <TouchableOpacity disabled={questionNumber < 1 ? true : false} onPress={()=>setQuestionNumber(currentNumber=>currentNumber < 1 ? currentNumber : currentNumber-1)} style={{width:"30%",height:50,alignItems:'center',justifyContent:'center',borderColor:"#2b4967",backgroundColor:"transparent",borderWidth:4,borderRadius:20,marginTop:30}}>
+           {questionNumber === 1 ? null : <TouchableOpacity onPress={()=>setQuestionNumber(currentNumber=>currentNumber < 1 ? currentNumber : currentNumber-1)} style={{width:"30%",height:50,alignItems:'center',justifyContent:'center',borderColor:"#2b4967",backgroundColor:"transparent",borderWidth:4,borderRadius:20,marginTop:30}}>
              <Text style={{color:"#fff",fontSize:20,fontWeight:'500'}}>Back</Text>
-           </TouchableOpacity>
+           </TouchableOpacity>}
            <TouchableOpacity onPress={()=>setQuestionNumber(currentNumber=>currentNumber < item.qna.length ? currentNumber+1  : currentNumber)} style={{width:"30%",height:50,alignItems:'center',justifyContent:'center',backgroundColor:"#357ee3",borderRadius:20,marginTop:30}}>
              <Text style={{color:"#fff",fontSize:20,fontWeight:'500'}}>Next</Text>
            </TouchableOpacity>
