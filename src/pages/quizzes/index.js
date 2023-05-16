@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const Quizzes = ({navigation}) => {
+const Quizzes = ({route,navigation}) => {
   const [questionNumber,setQuestionNumber] = useState(1)
-  const [selectedOption,setSelectedOption] = useState()
+  const [selectedOption,setSelectedOption] = useState(null)
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
   const [score, setScore] = useState(0)
   const [correctOption, setCorrectOption] = useState(null);
@@ -43,7 +43,6 @@ const Quizzes = ({navigation}) => {
     setSelectedOption(answer);
     setCorrectOption(correct_option);
     if(answer===correct_option){
-      console.log(true);
       setScore(score+1)
     }
     setShowNextButton(true)
@@ -52,7 +51,14 @@ const Quizzes = ({navigation}) => {
 
   const nextQuestion = (item)=>{
     if(questionNumber === item.qna.length){
-      navigation.navigate("Choises")
+      navigation.navigate("Choises",{name:route.params.name,score:[score,questionNumber]})
+      setQuestionNumber(1)
+      setSelectedOption(null)
+      setSelectedAnswerIndex(null)
+      setScore(0)
+      setCorrectOption(null)
+      setIsOptionsDisabled(false)
+      setShowNextButton(false)
     }else{
       setQuestionNumber(currentNumber=>currentNumber < item.qna.length ? currentNumber+1  : currentNumber)
       setSelectedOption(null);
@@ -61,8 +67,6 @@ const Quizzes = ({navigation}) => {
       setShowNextButton(false);
     }
   }
-
-  console.log(score);
 
   return (
     <View style={styles.container}>

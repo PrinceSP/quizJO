@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
 
 const Home = ({navigation}) => {
   const [name,setName] = useState("")
-  console.log(name);
   return (
     <KeyboardAvoidingView enabled behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
       <StatusBar
@@ -56,7 +55,7 @@ const Home = ({navigation}) => {
         onChangeText={setName}
         defaultValue={name}
       />
-    {name==="" ? null : <Button name="Start" press={()=>navigation.navigate('Quizzes')}  more={{text:styles.btnText,btn:styles.startBtn}}/>}
+    {name==="" ? null : <Button name="Start" press={()=>navigation.navigate('Quizzes',{name})}  more={{text:styles.btnText,btn:styles.startBtn}}/>}
     </KeyboardAvoidingView>
   )
 }
