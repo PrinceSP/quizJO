@@ -1,6 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Home,Quizzes,Results,SplashScreen} from '../pages'
+import {Home,Quizzes,Results,SplashScreen,Choises} from '../pages'
 
 const {Navigator,Screen} = createNativeStackNavigator()
 
@@ -11,6 +11,7 @@ const Routes = ()=>{
       <Screen name="Home" component={Home} options={{headerShown:false}}/>
       <Screen name="Quizzes" component={Quizzes} options={{headerShown:false}}/>
       <Screen name="Results" component={Results} options={{headerShown:false}}/>
+      <Screen name="Choises" component={Choises} options={{headerShown:false}}/>
     </Navigator>
   )
 }
